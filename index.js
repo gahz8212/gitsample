@@ -5,12 +5,12 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const { sequelize } = require("./models");
 const passport = require("passport");
-// const passportConfig = require("../passport");
+const passportConfig = require("./passport");
 const path = require("path");
 const nunjucks = require("nunjucks");
 const indexRouter = require("./routes");
 const app = express();
-// passportConfig();
+passportConfig();
 sequelize
   .sync({ force: false })
   .then(() => {
