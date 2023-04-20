@@ -11,14 +11,14 @@ const nunjucks = require("nunjucks");
 const indexRouter = require("./routes");
 const app = express();
 // passportConfig();
-// sequelize
-//   .sync({ force: false })
-//   .then(() => {
-//     console.log("db연결됨");
-//   })
-//   .catch((e) => {
-//     console.error(e);
-//   });
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("db연결됨");
+  })
+  .catch((e) => {
+    console.error(e);
+  });
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "html");
 nunjucks.configure("views", { express: app, watch: true });
