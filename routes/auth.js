@@ -17,4 +17,13 @@ router.post("/join", async (req, res, next) => {
     });
   }
 });
+router.get("/logout", (req, res, next) => {
+  return req.logout((e) => {
+    if (e) {
+      return next(e);
+    }
+    req.session.destroy();
+    return res.redirect("/");
+  });
+});
 module.exports = router;
