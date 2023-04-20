@@ -1,15 +1,14 @@
 const Sequelize = require("sequelize");
-module.exports = class Post extends Sequelize.model {
+module.exports = class Hashtag extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        content: { type: Sequelize.STRING(140), allowNull: false },
-        image: { type: Sequelize.STRING(200), allowNull: false },
-        createdAt: {
+        title: { type: Sequelize.STRING(40), allowNull: true, unique: true },
+        createAt: {
           type: "TIMESTAMP",
           defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         },
-        updatedAt: {
+        updateAt: {
           type: "TIMESTAMP",
           defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         },
@@ -19,15 +18,14 @@ module.exports = class Post extends Sequelize.model {
         timestamps: false,
         underscored: false,
         paranoid: false,
-        modelName: "Post",
-        tableName: "posts",
-        charset: "utf8mb4",
-        collate: "utf8mb4_general_ci",
+        modelName: "Hashtag",
+        tableName: "hashtags",
+        charset: "utf8",
+        collate: "utf8_general_ci",
       }
     );
   }
   static associate(db) {
-    db.Post.belongsTo(db.User);
-    db.Post.belongsToMany(db.Hashtag, { through: "PostHashtag" });
+    db.Hashtag.belongsToMany(db.Post, { through: "PostHashtag" });
   }
 };
